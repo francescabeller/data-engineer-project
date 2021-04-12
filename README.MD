@@ -121,7 +121,8 @@ Scaling with AWS Lambda can lead to some issues, however. These include:
 -  Extra attention may need to be paid to file operations due to the nature of Lambda deployment
 -  Gaps can appear between the domain of the business issue being addressed by the code and the actual code itself (technical/code drift)
 	- As new information is received, new requirements are created
-### Data Diagram
+  
+### Data Model
 ![Database Diagram](https://github.com/francescabeller/data-engineer-project/blob/master/guild-project-diagram.png)
 Table Descriptions:
 - `movies_master` - master table holding cleaned data from `movies_metadata.csv`
@@ -135,7 +136,6 @@ Table Descriptions:
 - `ratings_master` - master table for basic clean data from `ratings.csv`
 - `links_master` - master table for basic clean data from `links.csv`
 
-### Data Model
 
 Here is an example row of data for each of the tables we will be using...
 
