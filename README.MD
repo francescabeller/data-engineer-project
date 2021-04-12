@@ -39,9 +39,7 @@ Here is a list of the files/directories created for this project and a descripti
   - `requirements.txt` - file containing required Python packages for the code  
   - `Dockerfile` - Dockerfile for use when creating Lambda Layer for Python packages
   - `movieDataProcessingScaled.py` - script that takes in the five main files from the `the-movies-dataset.zip` file   
-    (`movies_metadata.csv`, `keywords.csv`, `links.csv`, `credits.csv`, & `ratings.csv`), cleanses the data, creates a  
-    new "aggregated" dataframe to perform desired SQL functions on, then uploads cleansed/new dataframes to S3 as   
-    .json files along with the error log file  
+    (`movies_metadata.csv`, `keywords.csv`, `links.csv`, `credits.csv`, & `ratings.csv`), cleanses the data, creates a new "aggregated" dataframe to perform desired SQL functions on, then uploads cleansed/new dataframes to S3 as .json files along with the error log file  
     
 ### Building/Running the Code  
 AWS Lambda will be the deployment method for this code. 
