@@ -271,6 +271,7 @@ from @MOVIES_JSON/<dated_folder>/links.json
 on_error = continue;
 ```
 The `MOVIES_AGGREGATED` table is the one we will be using to answer the following questions:
+
 Production Company Details:
 - budget per year
 ```sql
