@@ -72,8 +72,7 @@ yum install -y python3-pip && \
 yum install -y zip && \  
 yum clean allRUN python3.8 -m pip install --upgrade pip && \  
 python3.8 -m pip install virtualenv  
-```  
-- Create a Dockerfile with a configuration like:  
+```
 - Create Dockerfile with a tag
 ```shell
 usr> docker build -f "<filename>.Dockerfile" -t lambdalayer:latest .
