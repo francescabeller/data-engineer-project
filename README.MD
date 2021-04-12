@@ -318,23 +318,33 @@ order by production_company, release_year;
 Movie Genre Details:
 - most popular genre by year
 ```sql
-select production_company, release_year, sum(budget) as total_budget
-from (select production_company, movie_id, release_year, budget
-      from MOVIES_AGGREGATED
-      group by production_company, release_year, movie_id, budget)
-group by production_company, release_year
-order by production_company, release_year;
+select p.*
+from (select release_year, genre, avg(popularity) as average_popularity
+      from (select distinct genre, movie_id, release_year, popularity
+	    from MOVIES_AGGREGATED)
+      group by release_year, genre
+      order by release_year, average_popularity desc) as p
+qualify row_number() over (partition by release_year order by average_popularity desc) = 1;
 ```
-- revenue per year
+- budget  by production company by year
 ```sql
-select production_company, release_year, sum(revenue) as total_revenue
-from (select production_company, movie_id, release_year, revenue
+select genre, release_year, sum(budget) as total_budget
+from (select genre, movie_id, release_year, budget
       from MOVIES_AGGREGATED
-      group by production_company, release_year, movie_id, revenue)
-group by production_company, release_year
-order by production_company, release_year;
+      group by genre, release_year, movie_id, budget)
+group by genre, release_year
+order by genre, release_year;
 ```
-- profit per year
+- revenue by genre by year
+```sql
+select genre, release_year, sum(revenue) as total_revenue
+from (select genre, movie_id, release_year, revenue
+      from MOVIES_AGGREGATED
+      group by genre, release_year, movie_id, revenue)
+group by genre, release_year
+order by genre, release_year;
+```
+- profit by genre by year
 ```sql
 select production_company, release_year, sum(profit) as total_profit
 from (select production_company, movie_id, release_year, profit
@@ -343,23 +353,6 @@ from (select production_company, movie_id, release_year, profit
 group by production_company, release_year
 order by production_company, release_year;
 ```
-- releases by genre per year
-```sql
-select production_company, genre, release_year, count(distinct movie_id) as release_count
-from MOVIES_AGGREGATED
-group by production_company, genre, release_year
-order by production_company, genre, release_year;
-```
-- average popularity of produced movies per year
-```sql
-select production_company, release_year, avg(popularity) as avg_popularity
-from (select production_company, movie_id, release_year, popularity
-      from MOVIES_AGGREGATED
-      group by production_company, release_year, movie_id, popularity)
-group by production_company, release_year
-order by production_company, release_year;
-```
-
 
 ### Backfilling
 How would you go about backfilling 1 year worth of data?
