@@ -165,9 +165,9 @@ movie_id | cast_id | character | credit_id | gender | id | name | order | profil
 862 | 14 | Woody (voice) | 52fe4284c3a36847f8024f95 | 2 | 31 | Tom Hanks | 0 | pQFoyx7rp09CJTAb932F2g8Nlho.jpg
 
 `CREW_MASTER`
-movie_id | credit_id | department| gender| id| job| name | profile_path
------------|---------|-------------|-----------|----------|----|--------|-------|------- 
-862 | 52fe4284c3a36847f8024f49 | Directing | 2| 7879 | Director | John Lasseter | /7EdqiNbr4FRjIhKHyPPdFfEEEFG.jpg
+movie_id | credit_it | department | gender | id | job | name | profile_path
+-----------|---------|-------------|-----------|----------|----|--------|-------
+862 | 52fe4284c3a36847f8024f49 | Directing | 2 | 7879 | Directory | John Lasseter | /7EdqiNbr4FRjIhKHyPPdFfEEEFG.jpg
 
 `RATINGS_MASTER`
 movie_id | user_id | rating | timestamp
