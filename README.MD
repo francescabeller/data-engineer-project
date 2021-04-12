@@ -48,7 +48,7 @@ In order to handle scaling, I created a separate `movieDataProcessingScaled.py` 
 `movieDataProcessing.py`. The unscaled `MovieDataProcessor` simply takes in the entire .csv files as their own full  dataframes and outputs full .csv files. `MovieDataProcessorScaled` instead performs scaling at two levels. The first  level is through the actual pandas file intake, which will be performed in chunks of 10,000 for each of the five data  files being ingested, with each chunk being iterated over and put through the cleansing and uploading process. The  second level is through multi-part, multi-threaded JSON file uploads using Boto3, with the current threshold set at 20mb, which can be further adjusted for scaling.  
 
 ### Data Diagram
-![alt text](https://github.com/francescabeller/data-engineer-project/guild-project-diagram.png?raw=true)
+![Image](https://github.com/francescabeller/data-engineer-project/guild-project-diagram.png?raw=true)
 
 ### Data Model
 
