@@ -23,34 +23,32 @@ The designed data model must be able to at least answer the following questions:
 Here is a list of the files/directories created for this project and a description of each:  
 - Directory - `movie_data_unscaled`  
   - `__init__.py` - script initialization file  
-    - `main.py` - Python file to execute the `movie_processor` function from the `MovieDataProcessor` class
-    - `params.py` - file containing default parameters for the base environment (e.g. Region, AWS Access Key)
-    - `requirements.txt` - file containing required Python packages for the code  
-    - `Dockerfile` - Dockerfile for use when creating Lambda Layer for Python packages
-    - `movieDataProcessing.py` - script that takes in the five main files from the `the-movies-dataset.zip` file   
-      (`movies_metadata.csv`, `keywords.csv`, `links.csv`, `credits.csv`, & `ratings.csv`), cleanses the data, creates a  
-      new "aggregated" dataframe to perform desired SQL functions on, then uploads cleansed/new dataframes to S3 as .csv  
-      files along with the error log file  
+  - `main.py` - Python file to execute the `movie_processor` function from the `MovieDataProcessor` class
+  - `params.py` - file containing default parameters for the base environment (e.g. Region, AWS Access Key)
+  - `requirements.txt` - file containing required Python packages for the code  
+  - `Dockerfile` - Dockerfile for use when creating Lambda Layer for Python packages
+  - `movieDataProcessing.py` - script that takes in the five main files from the `the-movies-dataset.zip` file   
+    (`movies_metadata.csv`, `keywords.csv`, `links.csv`, `credits.csv`, & `ratings.csv`), cleanses the data, creates a  
+    new "aggregated" dataframe to perform desired SQL functions on, then uploads cleansed/new dataframes to S3 as .csv  
+    files along with the error log file  
         
 - Directory - `movie_data_scaled`  
   - `__init__.py` - script initialization file  
-    - `main.py` - Python file to execute the `movie_processor` function from the `MovieDataProcessorScaled` class  
-    - `params.py` - file containing default parameters for the base environment (e.g. Region, AWS Access Key)
-    - `requirements.txt` - file containing required Python packages for the code  
-    - `Dockerfile` - Dockerfile for use when creating Lambda Layer for Python packages
-    - `movieDataProcessingScaled.py` - script that takes in the five main files from the `the-movies-dataset.zip` file   
-      (`movies_metadata.csv`, `keywords.csv`, `links.csv`, `credits.csv`, & `ratings.csv`), cleanses the data, creates a  
-      new "aggregated" dataframe to perform desired SQL functions on, then uploads cleansed/new dataframes to S3 as   
-      .json files along with the error log file  
+  - `main.py` - Python file to execute the `movie_processor` function from the `MovieDataProcessorScaled` class  
+  - `params.py` - file containing default parameters for the base environment (e.g. Region, AWS Access Key)
+  - `requirements.txt` - file containing required Python packages for the code  
+  - `Dockerfile` - Dockerfile for use when creating Lambda Layer for Python packages
+  - `movieDataProcessingScaled.py` - script that takes in the five main files from the `the-movies-dataset.zip` file   
+    (`movies_metadata.csv`, `keywords.csv`, `links.csv`, `credits.csv`, & `ratings.csv`), cleanses the data, creates a  
+    new "aggregated" dataframe to perform desired SQL functions on, then uploads cleansed/new dataframes to S3 as   
+    .json files along with the error log file  
         
 ### Scaling  
 In order to handle scaling, I created a separate `movieDataProcessingScaled.py` version of the base   
 `movieDataProcessing.py`. The unscaled `MovieDataProcessor` simply takes in the entire .csv files as their own full  dataframes and outputs full .csv files. `MovieDataProcessorScaled` instead performs scaling at two levels. The first  level is through the actual pandas file intake, which will be performed in chunks of 10,000 for each of the five data  files being ingested, with each chunk being iterated over and put through the cleansing and uploading process. The  second level is through multi-part, multi-threaded JSON file uploads using Boto3, with the current threshold set at 20mb, which can be further adjusted for scaling.  
 
 ### Data Diagram
-```
 ![alt text](https://github.com/francescabeller/data-engineer-project/guild-project-diagram.png?raw=true)
-```
 
 ### Data Model
 
